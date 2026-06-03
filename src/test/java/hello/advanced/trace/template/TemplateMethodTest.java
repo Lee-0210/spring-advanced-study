@@ -1,6 +1,9 @@
 package hello.advanced.trace.template;
 
-import hello.advanced.trace.template.code.AbstractTemplate;import hello.advanced.trace.template.code.SubClassLogic1;import hello.advanced.trace.template.code.SubClassLogic2;import lombok.extern.slf4j.Slf4j;
+import hello.advanced.trace.template.code.AbstractTemplate;
+import hello.advanced.trace.template.code.SubClassLogic1;
+import hello.advanced.trace.template.code.SubClassLogic2;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 @Slf4j
@@ -43,6 +46,31 @@ public class TemplateMethodTest {
         template1.execute();
 
         AbstractTemplate template2 = new SubClassLogic2();
+        template2.execute();
+    }
+
+    /**
+     * 익명 클래스를 이용
+     */
+    @Test
+    void templateMethodV2() {
+        AbstractTemplate template1 = new AbstractTemplate() {
+
+            @Override
+            protected void call() {
+                log.info("비즈니스 로직1 실행");
+            }
+        };
+
+        AbstractTemplate template2 = new AbstractTemplate() {
+
+            @Override
+            protected void call() {
+                log.info("비즈니스 로직2 실행");
+            }
+        };
+
+        template1.execute();
         template2.execute();
     }
 }
